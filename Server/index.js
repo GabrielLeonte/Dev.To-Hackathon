@@ -4,7 +4,7 @@ import http from "http";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import router from "./router";
-import events from "./events";
+import { connection } from "./events";
 
 // load .env data
 dotenv.config();
@@ -24,8 +24,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // import routes inside the app
 app.use(router);
 
-// import io events on connection
-io.on("connection", events);
+// on connection event
+io.on("connection", connection);
 
 // listen the server on custom environment (.env file) port
 server.listen(process.env.PORT, () => {

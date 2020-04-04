@@ -1,5 +1,8 @@
-const events = (socket) => {
-  socket.on("data", (data) => socket.emit("data", data));
+let clients = 0;
+
+// on connection event
+const connection = (socket) => {
+  socket.emit("test", "salut")
 };
 
-export default events;
+export { connection };
