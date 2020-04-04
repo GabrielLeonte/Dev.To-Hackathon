@@ -1,45 +1,73 @@
 <template>
   <div class="login-page">
-    <div class="columns is-multiline is-mobile">
-      <div class="column is-full title">
-        <h1>Welcome</h1>
-      </div>
-      <div class="column is-full">
-        <img src="../assets/auth.svg" />
-      </div>
-      <div class="column is-full">
-        <input
-          type="tel"
-          class="phone"
-          placeholder="Phone number"
-          maxlength="10"
-        />
-      </div>
-      <div class="column is-full">
-        <input type="password" class="password" placeholder="Password" />
-      </div>
-      <div class="column is-full">
-        <input type="submit" value="Login" />
-      </div>
-      <div
-        class="column is-full links magic-box"
-        style="position: fixed; bottom: 0; text-align: center;"
-      >
-        <div class="link">
-          &#8226; Don't have an account?
-          <router-link to="/newAccount" style="color: #6fb555;">
-            Make one
-          </router-link>
+    <form @submit.prevent="login">
+      <div class="columns is-multiline is-mobile">
+        <div class="column is-full title">
+          <h1>Welcome</h1>
         </div>
-        <br />
-        <div class="link">
-          &#8226; Forgot Password?
-          <router-link to="/reset" style="color: #6fb555;">Reset </router-link>
+        <div class="column is-full">
+          <img src="../assets/auth.svg" />
+        </div>
+        <div class="column is-full">
+          <input
+            type="tel"
+            class="phone"
+            placeholder="Phone number"
+            maxlength="10"
+            v-model="phone"
+            required
+          />
+        </div>
+        <div class="column is-full">
+          <input
+            type="password"
+            class="password"
+            placeholder="Password"
+            v-model="password"
+            required
+          />
+        </div>
+        <div class="column is-full">
+          <input type="submit" value="Login" required />
+        </div>
+        <div
+          class="column is-full links magic-box"
+          style="position: fixed; bottom: 0; text-align: center;"
+        >
+          <div class="link">
+            &#8226; Don't have an account?
+            <router-link to="/newAccount" style="color: #6fb555;">
+              Make one
+            </router-link>
+          </div>
+          <br />
+          <div class="link">
+            &#8226; Forgot Password?
+            <router-link to="/reset" style="color: #6fb555;"
+              >Reset
+            </router-link>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      phone: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+        
+    },
+  },
+};
+</script>
 
 <style scoped>
 * {
@@ -49,7 +77,7 @@
   height: 100vh;
 }
 .title > h1 {
-  margin-top: 17vh;
+  margin-top: 10%;
   font-weight: 600;
   font-size: 40px;
 }
