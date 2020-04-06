@@ -11,7 +11,7 @@ const store = new Vuex.Store({
   mutations: {},
   actions: {
     SOCKET_test(state, payload) {
-      console.log(payload);
+    
     },
   },
 });

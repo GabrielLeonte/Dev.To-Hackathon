@@ -1,8 +1,7 @@
-let clients = 0;
+import login from "./events/login";
 
-// on connection event
 const connection = (socket) => {
-  socket.emit("test", "salut")
+  socket.on("login", login.bind(null, socket));
 };
 
-export { connection };
+export default connection;

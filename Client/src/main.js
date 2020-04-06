@@ -3,6 +3,7 @@ import Vue from "vue";
 import App from "./App";
 import VueSocketIO from "vue-socket.io";
 import SocketIO from "socket.io-client";
+import Notifications from "vue-notification";
 import router from "./router";
 import store from "./store";
 
@@ -20,6 +21,8 @@ Vue.use(
     },
   })
 );
+
+Vue.use(Notifications);
 
 /* eslint-disable no-new */
 new Vue({
