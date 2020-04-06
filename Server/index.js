@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import router from "./router";
 import connection from "./events";
+import "./utils/database";
 
 // load .env data
 dotenv.config();
@@ -29,7 +30,5 @@ io.on("connection", connection);
 
 // listen the server on custom environment (.env file) port
 server.listen(process.env.PORT, () => {
-  console.log(
-    "The Server is up and running on port " + process.env.PORT
-  );
+  console.log("The Server is up and running on port " + process.env.PORT);
 });
