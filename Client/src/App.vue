@@ -11,6 +11,9 @@ export default {
   sockets: {
     error_response(data) {
       this.$notify({ group: "foo", title: "ERROR", text: data, type: "error" });
+    },
+    token(token) {
+      this.$store.commit("test");
     }
   }
 };

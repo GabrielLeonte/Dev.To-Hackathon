@@ -8,7 +8,11 @@ const store = new Vuex.Store({
   state: {
     token: ""
   },
-  mutations: {},
+  mutations: {
+    test(state, payload){
+      console.log(payload)
+    }
+  },
   actions: {}
 });
 
