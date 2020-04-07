@@ -13,7 +13,7 @@ export default {
       this.$notify({ group: "foo", title: "ERROR", text: data, type: "error" });
     },
     token(token) {
-      this.$store.commit("test");
+      this.$store.commit("token", token.token);
     }
   }
 };

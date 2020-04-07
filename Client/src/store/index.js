@@ -9,8 +9,9 @@ const store = new Vuex.Store({
     token: ""
   },
   mutations: {
-    test(state, payload){
-      console.log(payload)
+    token(state, payload) {
+      state.token = payload;
+      localStorage.setItem("token", payload);
     }
   },
   actions: {}
