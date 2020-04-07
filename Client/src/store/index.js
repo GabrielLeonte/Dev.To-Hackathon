@@ -6,14 +6,10 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    token: "",
+    token: ""
   },
   mutations: {},
-  actions: {
-    SOCKET_test(state, payload) {
-    
-    },
-  },
+  actions: {}
 });
 
 export default store;

@@ -1,13 +1,18 @@
-import dotenv from "dotenv";
-import Sequelize from "sequelize";
+import User from "../models/user";
+import md5 from "md5";
 
-// load .env data
-dotenv.config();
+const createAccount = async (data) => {
+  try {
+    await User.sync();
+    await User.create({ lastName: data.lastName, phoneNumber: data.phoneNumber, password: md5(data.password), accountType: data.accountType });
+    return true;
+  } catch (err) {
+    throw err;
+  }
+};
 
-// connect to the database (sqlite one in our case)
-const sequelize = new Sequelize({ dialect: "sqlite", storage: process.env.DB_PATH });
+const comparePassword = async (phone, password) => (await User.findOne({ where: { phoneNumber: phone } }, { fields: ["password"] }).password) === md5(password); // return true if the database password is the same with the enter one
 
-/*const test = async () => {
-  await User.sync();
-  await User.create({ firstName: "XiaoMing", lastName: "1234567890", data: "xiaoming@qq.com" });
-};*/
+const checkIfUserExists = async (phone) => ((await User.findAll({ where: { phoneNumber: phone } })).length !== 0 ? false : true); // return true if the user doesn't exists
+
+export { createAccount, checkIfUserExists, comparePassword };

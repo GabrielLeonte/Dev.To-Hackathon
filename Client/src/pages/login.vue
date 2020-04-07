@@ -1,6 +1,5 @@
 <template>
   <div class="login-page">
-    <notifications position="right bottom" group="foo" />
     <form @submit.prevent="login">
       <div class="columns is-multiline is-mobile">
         <div class="column is-full title">
@@ -58,7 +57,7 @@ export default {
   data() {
     return {
       phone: "",
-      password: "",
+      password: ""
     };
   },
   methods: {
@@ -66,23 +65,13 @@ export default {
       try {
         this.$socket.emit("login", {
           phone: this.phone,
-          password: this.password,
+          password: this.password
         });
       } catch (err) {
         if (err) alert(err);
       }
-    },
-  },
-  sockets: {
-    login_response(data) {
-      this.$notify({
-        group: "foo",
-        title: "Important message",
-        text: "The password is incorrect",
-        type: "error",
-      });
-    },
-  },
+    }
+  }
 };
 </script>
 

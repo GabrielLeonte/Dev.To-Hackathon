@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <notifications position="right bottom" group="foo" />
     <router-view />
   </div>
 </template>
@@ -7,6 +8,11 @@
 <script>
 export default {
   name: "App",
+  sockets: {
+    error_response(data) {
+      this.$notify({ group: "foo", title: "ERROR", text: data, type: "error" });
+    }
+  }
 };
 </script>
 
