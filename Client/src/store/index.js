@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    token: "",
+    token: "" || localStorage.getItem("token"),
     user: {}
   },
   mutations: {
@@ -16,8 +16,8 @@ const store = new Vuex.Store({
       localStorage.setItem("token", payload);
       router.push("/");
     },
-    user_data(state, payload) {
-      state.user = payload.user_data;
+    user_data(state, data) {
+      state.user = data;
     },
     logout(state) {
       state.token = "";

@@ -1,21 +1,25 @@
 <template>
   <div class="login-page">
-    <form @submit.prevent="login">
+    <form @submit.prevent="signup">
       <div class="columns is-multiline is-mobile">
         <div class="column is-full title">
-          <h1>Welcome back</h1>
+          <h1>Its time to sign up</h1>
         </div>
         <div class="column is-full">
-          <img src="../assets/auth.svg" />
+          <img src="../assets/signup.svg" />
         </div>
         <div class="column is-full">
           <input
             type="tel"
-            class="phone"
-            placeholder="Phone"
-            v-model="phone"
+            class=""
+            placeholder="Last Name"
+            v-model="lastname"
             required
           />
+        </div>
+
+        <div class="column is-full">
+          <input type="tel" placeholder="Phone" v-model="phone" required />
         </div>
         <div class="column is-full">
           <input
@@ -25,18 +29,26 @@
             v-model="password"
             required
           />
+          <div class="column is-full">
+            <input
+              type="tel"
+              placeholder="Invite Code"
+              v-model="inviteCode"
+              required
+            />
+          </div>
         </div>
         <div class="column is-full">
-          <input type="submit" value="Login" required />
+          <input type="submit" value="Sign up" required />
         </div>
         <div
           class="column is-full links magic-box"
           style="position: fixed; bottom: 0; text-align: center;"
         >
           <div class="link">
-            &#8226; Don't have an account?
-            <router-link to="/signup" style="color: #6fb555;">
-              Make one
+            &#8226; Do you have an account?
+            <router-link to="/login" style="color: #6fb555;">
+              Login
             </router-link>
           </div>
           <br />
@@ -56,16 +68,20 @@
 export default {
   data() {
     return {
+      lastname: "",
       phone: "",
-      password: ""
+      password: "",
+      inviteCode: ""
     };
   },
   methods: {
-    login() {
+    signup() {
       try {
-        this.$socket.emit("login", {
+        this.$socket.emit("signup", {
+          lastname: this.lastname,
           phone: this.phone,
-          password: this.password
+          password: this.password,
+          code: this.inviteCode
         });
       } catch (err) {
         if (err) alert(err);
@@ -132,32 +148,26 @@ input[type="submit"]:hover {
 }
 img {
   width: 230px;
-  margin-bottom: 3%;
+  margin-bottom: 1%;
 }
-
 .vue-notification {
   padding: 10px;
   margin: 0 5px 5px;
-
   font-size: 12px;
-
   color: #ffffff;
   background: #44a4fc;
   border-left: 5px solid #187fe7;
   margin-right: 30px;
   padding-top: 20px;
 }
-
 .vue-notification.warn {
   background: #ffb648;
   border-left-color: #f48a06;
 }
-
 .vue-notification.error {
   background: #e54d42;
   border-left-color: #b82e24;
 }
-
 .vue-notification.success {
   background: #68cd86;
   border-left-color: #42a85f;

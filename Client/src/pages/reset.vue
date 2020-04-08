@@ -1,12 +1,12 @@
 <template>
   <div class="login-page">
-    <form @submit.prevent="login">
+    <form @submit.prevent="reset">
       <div class="columns is-multiline is-mobile">
         <div class="column is-full title">
-          <h1>Welcome back</h1>
+          <h1>Let's reset your password</h1>
         </div>
         <div class="column is-full">
-          <img src="../assets/auth.svg" />
+          <img src="../assets/forgot.svg" />
         </div>
         <div class="column is-full">
           <input
@@ -19,31 +19,19 @@
         </div>
         <div class="column is-full">
           <input
-            type="password"
-            class="password"
-            placeholder="Password"
-            v-model="password"
+            type="submit"
+            value="Send the password on the phone number"
             required
           />
-        </div>
-        <div class="column is-full">
-          <input type="submit" value="Login" required />
         </div>
         <div
           class="column is-full links magic-box"
           style="position: fixed; bottom: 0; text-align: center;"
         >
           <div class="link">
-            &#8226; Don't have an account?
-            <router-link to="/signup" style="color: #6fb555;">
-              Make one
-            </router-link>
-          </div>
-          <br />
-          <div class="link">
-            &#8226; Forgot Password?
-            <router-link to="/reset" style="color: #6fb555;"
-              >Reset
+            &#8226; Do you have an account?
+            <router-link to="/login" style="color: #6fb555;">
+              Login
             </router-link>
           </div>
         </div>
@@ -56,17 +44,13 @@
 export default {
   data() {
     return {
-      phone: "",
-      password: ""
+      phone: ""
     };
   },
   methods: {
-    login() {
+    reset() {
+      this.$socket.emit("reset", { phone: this.phone });
       try {
-        this.$socket.emit("login", {
-          phone: this.phone,
-          password: this.password
-        });
       } catch (err) {
         if (err) alert(err);
       }
@@ -106,9 +90,9 @@ input[type="submit"] {
   width: 300px;
   height: 40px;
   border-radius: 13px;
-  margin-top: 5vh;
+  margin-top: 12vh;
   outline: none;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 400;
   color: white;
 }
@@ -131,33 +115,28 @@ input[type="submit"]:hover {
   line-height: 15px;
 }
 img {
-  width: 230px;
+  width: 220px;
   margin-bottom: 3%;
+  margin-top: 3%;
 }
-
 .vue-notification {
   padding: 10px;
   margin: 0 5px 5px;
-
   font-size: 12px;
-
   color: #ffffff;
   background: #44a4fc;
   border-left: 5px solid #187fe7;
   margin-right: 30px;
   padding-top: 20px;
 }
-
 .vue-notification.warn {
   background: #ffb648;
   border-left-color: #f48a06;
 }
-
 .vue-notification.error {
   background: #e54d42;
   border-left-color: #b82e24;
 }
-
 .vue-notification.success {
   background: #68cd86;
   border-left-color: #42a85f;

@@ -5,10 +5,13 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import router from "./router";
 import connection from "./events";
-import "./utils/database";
+import databaseSync from "./sync";
 
 // load .env data
 dotenv.config();
+
+// create database tables if not exists
+databaseSync();
 
 // initiate express object
 const app = Express();

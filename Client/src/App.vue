@@ -22,7 +22,7 @@ export default {
       this.$store.commit("logout");
     },
     token(token) {
-      this.$store.commit("token", token.token);
+      this.$store.commit("token", token);
     },
     user_data(data) {
       this.$store.commit("user_data", data);
@@ -33,6 +33,10 @@ export default {
       if (this.$store.state.token)
         this.$socket.emit("token_valability", this.$store.state.token);
     }
+  },
+  mounted() {
+    if (this.$store.state.token)
+      this.$socket.emit("token_valability", this.$store.state.token);
   }
 };
 </script>

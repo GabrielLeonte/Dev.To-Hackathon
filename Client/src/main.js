@@ -17,8 +17,8 @@ Vue.use(
     vuex: {
       store,
       actionPrefix: "SOCKET_",
-      mutationPrefix: "SOCKET_",
-    },
+      mutationPrefix: "SOCKET_"
+    }
   })
 );
 
@@ -30,5 +30,5 @@ new Vue({
   router,
   store,
   components: { App },
-  template: "<App/>",
+  template: "<App/>"
 });

@@ -1,4 +1,5 @@
-import { checkIfUserExists, comparePassword, generateJWTByPhone, getUserDataByPhone } from "../utils/database";
+import { checkIfUserExists, comparePassword, getUserDataByPhone } from "../utils/database";
+import { generateJWTByPhone } from "../utils/JWT";
 
 const login = async (socket, data) => {
   try {
@@ -21,12 +22,11 @@ const login = async (socket, data) => {
     delete user["password"];
 
     // send token back to the client
-    socket.emit("token", { token: token });
+    socket.emit("token", { token });
 
     // send user data to update store
-    socket.emit("user_data", { user_data: user });
+    socket.emit("user_data", { user });
   } catch (err) {
-    console.log(err)
     socket.emit("error_response", err);
   }
 };
