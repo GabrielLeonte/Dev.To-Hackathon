@@ -20,7 +20,7 @@ const reset = async (socket, data) => {
     await sendNewPassword(data.phone, newPassword);
 
     // send success back to the client
-    socket.emit("success_response", `A new password has been sent on ${data.phone}`);
+    socket.emit("success_response", `A new password has been sent on ${data.phone} \nThis may take up to 15 minutes`);
   } catch (err) {
     socket.emit("error_response", err);
   }
