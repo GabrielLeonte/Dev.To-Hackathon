@@ -22,7 +22,7 @@ const login = async (socket, data) => {
     delete user["password"];
 
     // send token back to the client
-    socket.emit("token", { token });
+    socket.emit("token", token);
 
     // send user data to update store
     socket.emit("user_data", { user });

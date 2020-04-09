@@ -12,6 +12,19 @@ export default {
     error_response(data) {
       this.$notify({ group: "foo", title: "ERROR", text: data, type: "error" });
     },
+    success_response(data) {
+      // check if is forgot success message
+      if (data.includes("A new password has been sent on"))
+        this.$router.push("/login");
+
+      // show a success notification
+      this.$notify({
+        group: "foo",
+        title: "Success",
+        text: data,
+        type: "success"
+      });
+    },
     critical_error(data) {
       this.$notify({
         group: "foo",

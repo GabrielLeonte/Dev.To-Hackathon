@@ -4,6 +4,7 @@
     <div>{{ $store.state.user }}</div>
     <br />
     <div><button class="button" @click="logout">Logout</button></div>
+    <router-link to="/test">Catre test</router-link>
   </div>
 </template>
 

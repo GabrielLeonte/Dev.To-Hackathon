@@ -8,7 +8,7 @@ const signup = async (socket, data) => {
     if (await verifySignUpCode(data.code)) throw "The code is not valid";
 
     // check if the user  exists
-    if (await checkIfUserExists(data.phone)) throw "The phone number has already been used";
+    if (!(await checkIfUserExists(data.phone))) throw "The phone number has already been used";
 
     // insert user data into the database
     const UserData = await createAccount({ lastName: data.lastname, phoneNumber: data.phone, password: data.password, accountType: "user" });
@@ -28,7 +28,6 @@ const signup = async (socket, data) => {
     // update code stats
     await updateCode(data.code, UserData.id);
   } catch (err) {
-    console.log(err);
     socket.emit("error_response", err);
   }
 };

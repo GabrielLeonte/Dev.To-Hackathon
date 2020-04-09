@@ -3,7 +3,7 @@ import md5 from "md5";
 
 const getUserDataByPhone = async (phone) => (await User.findOne({ where: { phoneNumber: phone } })).dataValues; // return user Data from database
 
-const checkIfUserExists = async (phone) => ((await User.findAll({ where: { phoneNumber: phone } })).length !== 0 ? true : false); // return true if the user doesn't exists
+const checkIfUserExists = async (phone) => (await User.findAll({ where: { phoneNumber: phone } })).length === 0; // return true if the user doesn't exists
 
 const comparePassword = async (phone, password) => {
   try {
@@ -16,7 +16,7 @@ const comparePassword = async (phone, password) => {
     // return true if if the passwords match
     return DBpassword === CLpassword ? true : false;
   } catch (err) {
-    throw err;
+    throw JSON.stringify(err);
   }
 };
 
@@ -28,8 +28,20 @@ const createAccount = async (data) => {
     // return user data values
     return UserData.dataValues;
   } catch (err) {
-    throw err;
+    throw JSON.stringify(err);
   }
 };
 
-export { createAccount, checkIfUserExists, comparePassword, getUserDataByPhone };
+const updatePassword = async (phone, password) => {
+  try {
+    // update database record
+    await User.update({ password: md5(String(password)) }, { where: { phoneNumber: phone } });
+
+    // return true;
+    return true;
+  } catch (err) {
+    throw JSON.stringify(err);
+  }
+};
+
+export { createAccount, checkIfUserExists, comparePassword, getUserDataByPhone, updatePassword };
