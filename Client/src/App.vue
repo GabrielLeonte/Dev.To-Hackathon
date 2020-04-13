@@ -1,11 +1,13 @@
 <template>
   <div id="app">
+    <navbar />
     <notifications position="right bottom" group="foo" />
     <router-view />
   </div>
 </template>
 
 <script>
+import nav from "./layouts/default";
 export default {
   name: "App",
   sockets: {
@@ -50,6 +52,9 @@ export default {
   mounted() {
     if (this.$store.state.token)
       this.$socket.emit("token_valability", this.$store.state.token);
+  },
+  components: {
+    navbar: nav
   }
 };
 </script>
