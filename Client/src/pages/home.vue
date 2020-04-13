@@ -2,13 +2,22 @@
   <div>
     <nav class="custom-navbar">
       <div class="navbar-menu-btn">
-        <button class="material-icons" @click="closeDrower">menu</button>
+        <button class="material-icons menu" @click="closeDrower">menu</button>
       </div>
       <div class="navbar-title">We Help Dashboard</div>
     </nav>
 
-    <div v-if="drawer" class="drawer">
-      <i class="material-icons">account_circle</i>
+    <div :class="{ enter: drawer }" class="drawer">
+      <div class="options">
+        <div class="drawer-btn">
+          <div class="left"><span class="material-icons">home</span></div>
+          <div class="center"><span>Home</span></div>
+        </div>
+        <div class="drawer-btn">
+          <div class="left"><span class="material-icons">history</span></div>
+          <div class="center"><span>History</span></div>
+        </div>
+      </div>
     </div>
 
     <span>Click !</span>
@@ -28,14 +37,14 @@ export default {
     logout() {
       this.$store.commit("logout");
     },
-    closeDrower(){
-      this.drawer = !this.drawer 
+    closeDrower() {
+      this.drawer = !this.drawer;
     }
   },
-  data(){
+  data() {
     return {
-      drawer: true,
-    }
+      drawer: true
+    };
   }
 };
 </script>
@@ -46,10 +55,17 @@ export default {
   outline: none;
 }
 .drawer {
+  position: fixed;
   float: left;
   width: 17rem;
+  left: -17rem;
   height: 100vh;
   border-right: solid #838383de 0.5px;
+  transition: all 0.25s;
+}
+.enter {
+  transition: all 0.25s;
+  left: 0;
 }
 .custom-navbar {
   width: 100%;
@@ -74,7 +90,7 @@ export default {
 .navbar-menu-btn .material-icons {
   vertical-align: middle;
 }
-button.material-icons {
+button.material-icons.menu {
   float: left;
   color: #ffffff;
   margin-left: 1%;
@@ -122,5 +138,40 @@ button.material-icons:focus:not(:active)::after {
     opacity: 0;
     transform: scale(40, 40);
   }
+}
+.options {
+  margin-top: 10px;
+  width: 17rem;
+}
+.drawer-btn {
+  display: table;
+  border: 0;
+  width: 100%;
+  height: 50px;
+  font-size: 13px;
+  vertical-align: middle;
+}
+.drawer-btn:hover {
+  background: #cfcfcf80;
+  transition: all 0.3s;
+}
+.left {
+  float: left;
+  text-align: left;
+  margin-right: 35px;
+  margin-left: 10%;
+  font-size: 24px;
+  color: #636363;
+}
+.center {
+  display: block;
+  text-align: left;
+  float: center;
+  font-weight: 700;
+  color: #414141;
+}
+.drawer-btn span {
+  line-height: 50px;
+  vertical-align: middle;
 }
 </style>
