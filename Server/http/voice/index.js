@@ -3,16 +3,19 @@ import { twiml as voiceModule } from "twilio";
 const voice = async (req, res) => {
   const twiml = new voiceModule.VoiceResponse();
 
-  twiml.say(
-    "Hello Thanks for calling to Student Society We are here to help you pass Covid 19 Period"
-  );
+  twiml.say("Hello please record your message"); // ...... and more about you
 
-  const gather = twiml.gather({
+  twiml.record({
+    action: "/record",
+    maxLength: "200",
+  });
+
+  /* const gather = twiml.gather({
     numDigits: 1,
     action: "/gather",
   });
 
-  gather.say("");
+  gather.say("");*/
 
   // Render the response as XML in reply to the webhook request
   res.type("text/xml");
