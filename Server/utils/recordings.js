@@ -11,7 +11,7 @@ const createRecordIntoDatabase = async (body) => {
       CallerZip: body.CallerZip,
       RecordingDuration: body.RecordingDuration,
       RecordingUrl: body.RecordingUrl,
-      Status: "waiting"
+      Status: "waiting",
     });
 
     return true;
@@ -20,6 +20,12 @@ const createRecordIntoDatabase = async (body) => {
   }
 };
 
-global.queue = 1
+const getAllCases = async () => {
+  try {
+    return await Recordings.findAll();
+  } catch (err) {
+    throw JSON.stringify(err);
+  }
+};
 
-export { createRecordIntoDatabase };
+export { createRecordIntoDatabase, getAllCases };

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navbar />
+    <navbar v-if="$store.state.token" />
     <notifications position="right bottom" group="foo" />
     <router-view />
   </div>
@@ -41,6 +41,9 @@ export default {
     },
     user_data(data) {
       this.$store.commit("user_data", data);
+    },
+    cases(data) {
+      this.$store.commit("cases", data);
     }
   },
   watch: {

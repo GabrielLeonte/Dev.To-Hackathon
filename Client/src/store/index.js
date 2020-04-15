@@ -8,6 +8,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     token: "" || localStorage.getItem("token"),
+    cases: [],
     user: {}
   },
   mutations: {
@@ -23,6 +24,9 @@ const store = new Vuex.Store({
       state.token = "";
       localStorage.removeItem("token");
       router.push("/login");
+    },
+    cases(state, data) {
+      state.cases = data;
     }
   },
   actions: {}

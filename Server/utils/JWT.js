@@ -20,4 +20,12 @@ const generateJWTByPhone = async (phone) => {
   }
 };
 
-export { generateJWTByPhone };
+const verifyJWT = async (token) => {
+  try {
+    await jwt.verify(token, process.env.ACCOUNT_SECRET);
+  } catch (err) {
+    throw "Invalid JWT";
+  }
+};
+
+export { generateJWTByPhone, verifyJWT };

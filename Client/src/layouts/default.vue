@@ -6,23 +6,32 @@
         <button class="material-icons menu" @click="closeDrower">menu</button>
       </div>
       <div class="navbar-title">We Help Dashboard</div>
+      <div class="navbar-menu-btn right">
+        <button class="material-icons menu" @click="logout">exit_to_app</button>
+      </div>
     </nav>
 
     <!-- Drawer -->
     <div :class="{ enter: drawer }" class="drawer">
       <div class="options">
-        <div class="drawer-btn">
+        <router-link to="/" class="drawer-btn">
           <div class="left"><span class="material-icons">home</span></div>
           <div class="center"><span>Home</span></div>
-        </div>
-        <div class="drawer-btn">
-          <div class="left"><span class="material-icons">face</span></div>
+        </router-link>
+        <router-link to="/openCases" class="drawer-btn">
+          <div class="left">
+            <span class="material-icons">record_voice_over</span>
+          </div>
           <div class="center"><span>Open Cases</span></div>
-        </div>
-        <div class="drawer-btn">
+        </router-link>
+        <router-link to="/history" class="drawer-btn">
           <div class="left"><span class="material-icons">history</span></div>
           <div class="center"><span>History</span></div>
-        </div>
+        </router-link>
+        <router-link to="/settings" class="drawer-btn">
+          <div class="left"><span class="material-icons">settings</span></div>
+          <div class="center"><span>Settings</span></div>
+        </router-link>
       </div>
     </div>
   </section>
@@ -172,5 +181,9 @@ button.material-icons:focus:not(:active)::after {
 .drawer-btn span {
   line-height: 50px;
   vertical-align: middle;
+}
+.right {
+  margin-right: 1%;
+  float: right;
 }
 </style>
