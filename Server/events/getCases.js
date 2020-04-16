@@ -1,7 +1,11 @@
 import { getAllCases } from "../utils/recordings";
+import { verifyJWT } from "../utils/JWT";
 
 const getCases = async (socket, data) => {
   try {
+    // make sure JWT Token is Valid
+    await verifyJWT(data);
+
     // get all cases from the database
     const cases = await getAllCases();
 
@@ -9,7 +13,7 @@ const getCases = async (socket, data) => {
     socket.emit("cases", cases);
   } catch (err) {
     console.log(err);
-    socket.emit("error_response", err);
+    socket.emit("critical_error", err);
   }
 };
 

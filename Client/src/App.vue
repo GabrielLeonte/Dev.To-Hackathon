@@ -72,6 +72,6 @@ body {
 
 #app {
   font-family: "Roboto", sans-serif;
-  text-align: center;
+  text-align: left;
 }
 </style>
