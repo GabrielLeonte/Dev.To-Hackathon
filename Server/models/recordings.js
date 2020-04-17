@@ -42,6 +42,9 @@ Recordings.init(
     Status: {
       type: Sequelize.STRING,
       allowNull: false
+    },
+    takenBy: {
+      type: Sequelize.STRING
     }
   },
   {

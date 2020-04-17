@@ -22,7 +22,8 @@ const generateJWTByPhone = async (phone) => {
 
 const verifyJWT = async (token) => {
   try {
-    await jwt.verify(token, process.env.ACCOUNT_SECRET);
+    // return JWT Token data if it is required
+    return await jwt.verify(token, process.env.ACCOUNT_SECRET);
   } catch (err) {
     throw "Invalid JWT";
   }

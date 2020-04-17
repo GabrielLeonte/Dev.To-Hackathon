@@ -28,4 +28,12 @@ const getAllCases = async () => {
   }
 };
 
-export { createRecordIntoDatabase, getAllCases };
+const getMyCases = async (phone) => {
+  try {
+    return await Recordings.findAll({ where: { takenBy: phone } });
+  } catch (err) {
+    throw JSON.stringify(err);
+  }
+};
+
+export { createRecordIntoDatabase, getAllCases, getMyCases };
