@@ -14,6 +14,9 @@ export default {
     error_response(data) {
       this.$notify({ group: "foo", title: "ERROR", text: data, type: "error" });
     },
+    MyCases(data) {
+      this.$store.commit("mycases", data);
+    },
     success_response(data) {
       // check if is forgot success message
       if (data.includes("A new password has been sent on"))
@@ -53,8 +56,10 @@ export default {
     }
   },
   mounted() {
-    if (this.$store.state.token)
+    if (this.$store.state.token) {
       this.$socket.emit("token_valability", this.$store.state.token);
+      this.$socket.emit("getMyCases", this.$store.state.token);
+    }
   },
   components: {
     navbar: nav

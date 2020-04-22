@@ -9,6 +9,7 @@ const store = new Vuex.Store({
   state: {
     token: "" || localStorage.getItem("token"),
     cases: [],
+    mycases: [],
     user: {}
   },
   mutations: {
@@ -26,7 +27,10 @@ const store = new Vuex.Store({
       router.push("/login");
     },
     cases(state, data) {
-      state.cases = data;
+      state.cases = data
+    },
+    mycases(state, data) {
+      state.mycases = data;
     }
   },
   actions: {}

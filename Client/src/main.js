@@ -5,6 +5,7 @@ import VueSocketIO from "vue-socket.io";
 import SocketIO from "socket.io-client";
 import Notifications from "vue-notification";
 import Chartkick from "vue-chartkick";
+import VModal from 'vue-js-modal'
 import Chart from "chart.js";
 import router from "./router";
 import store from "./store";
@@ -23,6 +24,8 @@ Vue.use(
     }
   })
 );
+
+Vue.use(VModal)
 
 Vue.use(Chartkick.use(Chart));
 

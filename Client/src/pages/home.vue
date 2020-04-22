@@ -2,25 +2,26 @@
   <div>
     <div class="title">
       <span>
-        Taken Cases
+        My Cases
       </span>
     </div>
     <div class="table-container">
       <table>
         <tr>
           <th style="width: 350px;">Call ID</th>
-          <th style="width: 150px;">Caller Number</th>
+          <th style="width: 180px;">Caller Number</th>
           <th style="width: 130px;">Caller City</th>
           <th style="width: 100px;">Caller State</th>
           <th style="width: 100px;">Caller Zip</th>
           <th style="width: 80px;">Duration</th>
           <th style="width: 80px;">Status</th>
-          <th style="width: 80px;">Listen</th>
+          <th style="width: 80px;">Play</th>
+          <th style="width: 80px;">Submit</th>
         </tr>
         <tr
-          v-for="(item, index) in $store.state.cases"
+          v-for="(item, index) in $store.state.mycases"
           :key="index"
-          style="line-height: 40px;   vertical-align: baseline;"
+          style="line-height: 40px; vertical-align: baseline;"
         >
           <td>{{ item.CallSid }}</td>
           <td>{{ item.Caller }}</td>
@@ -29,26 +30,40 @@
           <td>{{ item.CallerZip }}</td>
           <td>{{ item.RecordingDuration }} s</td>
           <td>{{ item.Status }}</td>
-          <button class="material-icons" @click="playAudio(item.RecordingUrl)">
-            play_arrow
-          </button>
+          <td>
+            <button
+              class="button is-danger is-small"
+              @click="playAudio(item.RecordingUrl)"
+            >
+              Listen
+            </button>
+          </td>
+          <td>
+            <button class="button is-success is-small" @click="submit()">
+              Submit to Volunteers
+            </button>
+          </td>
+        </tr>
+        <tr v-if="$store.state.mycases.length === 0">
+          <td style="font-size: 14.5px; padding-top: 10px">
+            No case has been taken!
+          </td>
         </tr>
       </table>
     </div>
-    <div class="chart">
-      <line-chart
-        class="test"
-        :data="{
-          '2017-05-13': 2,
-          '2017-05-14': 5,
-          '2017-05-15': 5,
-          '2017-05-16': 20,
-          '2017-05-17': 5,
-          '2017-05-18': 5,
-          '2017-05-19': 5
-        }"
-      ></line-chart>
-    </div>
+    <modal name="submit-to-volunteers">
+      <div>
+        <div>
+          <span class="custom-title">Submit to Volunteers</span>
+        </div>
+        <div>
+          <span class="custom-subtitle">
+            In order to help peoples you will have to chose the best volunteer
+            for the user's requests!
+          </span>
+        </div>
+      </div>
+    </modal>
   </div>
 </template>
 
@@ -56,12 +71,14 @@
 export default {
   methods: {
     playAudio(url) {
-      // new Audio(url).play()
+      new Audio(url).play();
+    },
+    submit() {
+      this.$modal.show("submit-to-volunteers");
     }
   },
   mounted() {
     this.$socket.emit("getCases", this.$store.state.token);
-    console.log(12);
   }
 };
 </script>
@@ -69,12 +86,6 @@ export default {
 <style scoped>
 * {
   outline: none;
-}
-.chart {
-  max-width: 400px !important;
-  position: fixed;
-  top: 120px;
-  right: 4%;
 }
 .title {
   position: relative;
@@ -89,56 +100,6 @@ export default {
   margin-top: 2%;
   left: 2%;
 }
-button.material-icons {
-  user-select: none;
-  outline: none;
-  float: left;
-  color: #ffffff;
-  margin-left: 1%;
-  display: block;
-  border: 0;
-  background: #e91e40 !important;
-  color: #ffffff;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin-top: 4px;
-}
-button.material-icons {
-  position: relative;
-  overflow: hidden;
-}
-button.material-icons:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  background: #ffffff80;
-  opacity: 0;
-  border-radius: 100%;
-  transform: scale(1, 1) translate(-50%);
-  transform-origin: 50% 50%;
-}
-button.material-icons:focus:not(:active)::after {
-  animation: ripple 1s ease-out;
-}
-
-@keyframes ripple {
-  0% {
-    transform: scale(0, 0);
-    opacity: 1;
-  }
-  20% {
-    transform: scale(25, 25);
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(40, 40);
-  }
-}
 th {
   border-bottom: solid #8d8d8d 0.5px;
   user-select: none;
@@ -146,5 +107,20 @@ th {
 td {
   font-size: 12px;
   font-weight: 700;
+}
+button.is-small {
+  margin-top: 8px;
+}
+/* Modal Items CSS Here */
+
+.custom-title {
+  font-size: 25px;
+  padding-left: 5px;
+  font-weight: 700;
+}
+.custom-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  padding-left: 7px;
 }
 </style>

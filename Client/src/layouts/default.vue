@@ -68,7 +68,6 @@ export default {
   height: 100vh;
   border-right: solid #838383de 0.5px;
   transition: all 0.25s;
-  z-index: 1000;
 }
 .enter {
   position: relative;
