@@ -1,7 +1,7 @@
 import { getAllCases } from "../utils/recordings";
 import { verifyJWT } from "../utils/JWT";
 
-const getCases = async (socket, data) => {
+const getCasesEvent = async (socket, data) => {
   try {
     // make sure JWT Token is Valid
     await verifyJWT(data);
@@ -17,4 +17,4 @@ const getCases = async (socket, data) => {
   }
 };
 
-export default getCases;
+export default getCasesEvent;

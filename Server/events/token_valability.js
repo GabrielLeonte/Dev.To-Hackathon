@@ -6,7 +6,7 @@ import { getUserDataByPhone } from "../utils/database";
 dotenv.config();
 
 // check if the token is valid
-const token_valability = async (socket, token) => {
+const token_valabilityEvent = async (socket, token) => {
   try {
     // get user data from a valid token
     const UserData = await jwt.verify(token, process.env.ACCOUNT_SECRET);
@@ -24,4 +24,4 @@ const token_valability = async (socket, token) => {
   }
 };
 
-export default token_valability;
+export default token_valabilityEvent;

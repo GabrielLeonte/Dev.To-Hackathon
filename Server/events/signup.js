@@ -2,7 +2,7 @@ import { verifySignUpCode, updateCode } from "../utils/code";
 import { checkIfUserExists, createAccount } from "../utils/database";
 import { generateJWTByPhone } from "../utils/JWT";
 
-const signup = async (socket, data) => {
+const signupEvent = async (socket, data) => {
   try {
     // check if the sign up code is valid
     if (await verifySignUpCode(data.code)) throw "The code is not valid";
@@ -32,4 +32,4 @@ const signup = async (socket, data) => {
   }
 };
 
-export default signup;
+export default signupEvent;

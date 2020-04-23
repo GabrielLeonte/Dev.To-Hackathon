@@ -2,9 +2,6 @@
   <section>
     <!-- Navbar -->
     <nav class="custom-navbar">
-      <div class="navbar-menu-btn">
-        <button class="material-icons menu" @click="closeDrower">menu</button>
-      </div>
       <div class="navbar-title">We Help Dashboard</div>
       <div class="navbar-menu-btn right">
         <button class="material-icons menu" @click="logout">exit_to_app</button>
@@ -12,7 +9,7 @@
     </nav>
 
     <!-- Drawer -->
-    <div :class="{ enter: drawer }" class="drawer">
+    <div class="drawer enter">
       <div class="options">
         <router-link to="/" class="drawer-btn">
           <div class="left"><span class="material-icons">home</span></div>
@@ -42,15 +39,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit("logout");
-    },
-    closeDrower() {
-      this.drawer = !this.drawer;
     }
-  },
-  data() {
-    return {
-      drawer: true
-    };
   }
 };
 </script>
@@ -64,7 +53,6 @@ export default {
   position: absolute;
   float: left;
   width: 17rem;
-  left: -17rem;
   height: 100vh;
   border-right: solid #838383de 0.5px;
   transition: all 0.25s;

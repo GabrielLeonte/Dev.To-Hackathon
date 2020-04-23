@@ -1,7 +1,7 @@
 import { checkIfUserExists, comparePassword, getUserDataByPhone } from "../utils/database";
 import { generateJWTByPhone } from "../utils/JWT";
 
-const login = async (socket, data) => {
+const loginEvent = async (socket, data) => {
   try {
     // check if all parameters exists in the data object
     if (Object.keys(data).length !== 2 || !data.phone || !data.password) throw "Please provide the correct login params";
@@ -31,4 +31,4 @@ const login = async (socket, data) => {
   }
 };
 
-export default login;
+export default loginEvent;

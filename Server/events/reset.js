@@ -2,7 +2,7 @@ import sendNewPassword from "../utils/twilio";
 import { generatePassword } from "../utils/strings";
 import { updatePassword, checkIfUserExists } from "../utils/database";
 
-const reset = async (socket, data) => {
+const resetEvent = async (socket, data) => {
   try {
     // check if the phone is empty
     if (!data.phone) throw "A phone number must be provided";
@@ -26,4 +26,4 @@ const reset = async (socket, data) => {
   }
 };
 
-export default reset;
+export default resetEvent;

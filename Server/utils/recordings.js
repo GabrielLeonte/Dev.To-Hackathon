@@ -22,15 +22,18 @@ const createRecordIntoDatabase = async (body) => {
 
 const getAllCases = async () => {
   try {
+    console.log(await Recordings.findAll());
+
     return await Recordings.findAll();
   } catch (err) {
     throw JSON.stringify(err);
   }
 };
 
-const getMyCases = async (phone) => {
+const getMyCases = async (id) => {
   try {
-    return await Recordings.findAll({ where: { takenBy: phone } });
+    const cases = await Recordings.findAll({ where: { takenBy: id } });
+    return cases;
   } catch (err) {
     throw JSON.stringify(err);
   }

@@ -41,11 +41,17 @@ Recordings.init(
     },
     Status: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
     takenBy: {
-      type: Sequelize.STRING
-    }
+      type: Sequelize.STRING,
+    },
+    takenByTime: {
+      type: Sequelize.STRING,
+    },
+    expiresAt: {
+      type: Sequelize.STRING,
+    },
   },
   {
     sequelize,
