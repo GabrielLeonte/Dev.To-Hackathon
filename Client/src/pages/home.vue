@@ -50,7 +50,7 @@
             </button>
           </td>
           <td>
-            <button type="submit" class="button is-danger is-small">
+            <button @click="release()" class="button is-danger is-small">
               Release
             </button>
           </td>
@@ -130,6 +130,8 @@
         </div>
       </form>
     </modal>
+    <!-- Release Modal -->
+    <v-dialog />
   </div>
 </template>
 
@@ -143,14 +145,32 @@ export default {
       this.modalID = modalID;
       this.$modal.show("submit-to-volunteers");
     },
-    async submitToVolunteers() {
+    release() {
+      this.$modal.show("dialog", {
+        title: "Release this case?",
+        buttons: [
+          {
+            title: "Yes :(",
+            handler: () => {
+              alert("Woot!");
+            }
+          },
+          {
+            title: "Nope"
+          }
+        ]
+      });
+    },
+    submitToVolunteers() {
       this.$modal.hide("submit-to-volunteers");
-      console.log({
+      const data = {
         id: this.modalID,
         description: this.description,
         type: this.volunteerType,
         clientName: this.clientName
-      });
+      };
+
+      this.$socket.emit("solve_cases", data);
     }
   },
   mounted() {

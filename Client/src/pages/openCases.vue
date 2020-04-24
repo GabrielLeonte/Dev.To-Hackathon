@@ -41,12 +41,18 @@
             </button>
           </td>
           <td>
-            <button class="button is-warning is-small ">Take the case</button>
+            <button class="button is-warning is-small" @click="takeCase">
+              Take the case
+            </button>
           </td>
         </tr>
-        <td v-if="$store.state.cases.length == 0">Well, that's a good sign, nobody needs our help at this moment! :D</td>
+        <td v-if="$store.state.cases.length == 0">
+          Well, that's a good sign, nobody needs our help at this moment! :D
+        </td>
       </table>
     </div>
+    <!-- Take case Confirm Modal -->
+    <v-dialog :width="600" />
   </div>
 </template>
 
@@ -55,6 +61,25 @@ export default {
   methods: {
     playAudio(url) {
       new Audio(url).play();
+    },
+    takeCase() {
+      this.$modal.show("dialog", {
+        title: "Take the case",
+        text:
+          "Make sure that you are able to fully understand the needs of this man, and if you're sure!",
+
+        buttons: [
+          {
+            title: "Let's do this, this man needs my help!",
+            handler: () => {
+              alert("Woot!");
+            }
+          },
+          {
+            title: "I'am not sure, better not"
+          }
+        ]
+      });
     }
   },
   mounted() {
