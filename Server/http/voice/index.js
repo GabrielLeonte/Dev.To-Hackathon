@@ -3,7 +3,7 @@ import { twiml as voiceModule } from "twilio";
 const voice = async (req, res) => {
   const twiml = new voiceModule.VoiceResponse();
 
-  twiml.say("Hello please record your message"); // ...... and more about you
+  // twiml.say("Hello please record your message"); // ...... and more about you
 
   twiml.record({
     action: "/record",

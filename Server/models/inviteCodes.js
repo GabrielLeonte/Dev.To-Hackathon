@@ -1,4 +1,4 @@
-import { sequelize, Sequelize } from "../database";
+import { sequelize, Sequelize } from "../databaseGlobalObject";
 
 const Model = Sequelize.Model;
 class Codes extends Model {}

@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { getUserDataByPhone } from "../utils/database";
+import { getUserDataByPhone } from "../../utils/database";
 
 // load .env data
 dotenv.config();

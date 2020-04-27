@@ -41,7 +41,7 @@
             </button>
           </td>
           <td>
-            <button class="button is-warning is-small" @click="takeCase">
+            <button class="button is-warning is-small" @click="takeCase(item.CallSid)">
               Take the case
             </button>
           </td>
@@ -62,7 +62,7 @@ export default {
     playAudio(url) {
       new Audio(url).play();
     },
-    takeCase() {
+    takeCase(CallSid) {
       this.$modal.show("dialog", {
         title: "Take the case",
         text:
@@ -72,7 +72,11 @@ export default {
           {
             title: "Let's do this, this man needs my help!",
             handler: () => {
-              alert("Woot!");
+              this.$modal.hide("dialog");
+              this.$socket.emit("takeCase", {
+                token: this.$store.state.token,
+                CallSid: CallSid
+              });
             }
           },
           {

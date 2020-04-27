@@ -1,5 +1,5 @@
-import { getAllCases } from "../utils/recordings";
-import { verifyJWT } from "../utils/JWT";
+import { getAllCases } from "../../utils/recordings";
+import { verifyJWT } from "../../utils/JWT";
 
 const getCasesEvent = async (socket, data) => {
   try {

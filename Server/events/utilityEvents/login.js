@@ -1,5 +1,5 @@
-import { checkIfUserExists, comparePassword, getUserDataByPhone } from "../utils/database";
-import { generateJWTByPhone } from "../utils/JWT";
+import { checkIfUserExists, comparePassword, getUserDataByPhone } from "../../utils/database";
+import { generateJWTByPhone } from "../../utils/JWT";
 
 const loginEvent = async (socket, data) => {
   try {

@@ -50,7 +50,10 @@
             </button>
           </td>
           <td>
-            <button @click="release()" class="button is-danger is-small">
+            <button
+              @click="release(item.CallSid)"
+              class="button is-danger is-small"
+            >
               Release
             </button>
           </td>
@@ -145,14 +148,18 @@ export default {
       this.modalID = modalID;
       this.$modal.show("submit-to-volunteers");
     },
-    release() {
+    release(CallSid) {
       this.$modal.show("dialog", {
         title: "Release this case?",
         buttons: [
           {
             title: "Yes :(",
             handler: () => {
-              alert("Woot!");
+              this.$socket.emit("releaseCase", {
+                CallSid: CallSid,
+                token: this.$store.state.token
+              });
+              this.$modal.hide("dialog")
             }
           },
           {

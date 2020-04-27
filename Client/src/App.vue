@@ -8,6 +8,7 @@
 
 <script>
 import nav from "./layouts/default";
+
 export default {
   name: "App",
   sockets: {
@@ -22,6 +23,13 @@ export default {
       if (data.includes("A new password has been sent on"))
         this.$router.push("/login");
 
+      // check if its a case success message
+      if (
+        data.includes("has been successfully taken") ||
+        data.includes("has been successfully release")
+      )
+        this.$socket.emit("getMyCases", this.$store.state.token);
+
       // show a success notification
       this.$notify({
         group: "foo",
@@ -34,7 +42,7 @@ export default {
       this.$notify({
         group: "foo",
         title: data.name,
-        text: data.message.charAt(0).toUpperCase() + data.message.slice(1),
+        text: data.replace(`"`, ""),
         type: "error"
       });
       this.$store.commit("logout");
@@ -47,6 +55,13 @@ export default {
     },
     cases(data) {
       this.$store.commit("cases", data);
+    },
+    newOpenCase(data) {
+      this.$store.commit("newOpenCase", data);
+      this.$socket.emit("getMyCases", this.$store.state.token);
+    },
+    removeOpenCase(data) {
+      this.$store.commit("removeOpenCase", data);
     }
   },
   watch: {

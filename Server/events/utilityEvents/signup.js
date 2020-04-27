@@ -1,6 +1,6 @@
-import { verifySignUpCode, updateCode } from "../utils/code";
-import { checkIfUserExists, createAccount } from "../utils/database";
-import { generateJWTByPhone } from "../utils/JWT";
+import { verifySignUpCode, updateCode } from "../../utils/code";
+import { checkIfUserExists, createAccount } from "../../utils/database";
+import { generateJWTByPhone } from "../../utils/JWT";
 
 const signupEvent = async (socket, data) => {
   try {

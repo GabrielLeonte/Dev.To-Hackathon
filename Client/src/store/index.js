@@ -27,10 +27,16 @@ const store = new Vuex.Store({
       router.push("/login");
     },
     cases(state, data) {
-      state.cases = data
+      state.cases = data.filter(value => value.Status === "waiting");
     },
     mycases(state, data) {
       state.mycases = data;
+    },
+    newOpenCase(state, data) {
+      state.cases.push(data);
+    },
+    removeOpenCase(state, data) {
+      state.cases = state.cases.filter(value => value.CallSid !== data.CallSid);
     }
   },
   actions: {}

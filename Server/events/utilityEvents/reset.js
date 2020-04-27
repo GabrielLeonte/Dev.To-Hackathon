@@ -1,6 +1,6 @@
-import sendNewPassword from "../utils/twilio";
-import { generatePassword } from "../utils/strings";
-import { updatePassword, checkIfUserExists } from "../utils/database";
+import sendNewPassword from "../../utils/twilio";
+import { generatePassword } from "../../utils/strings";
+import { updatePassword, checkIfUserExists } from "../../utils/database";
 
 const resetEvent = async (socket, data) => {
   try {
