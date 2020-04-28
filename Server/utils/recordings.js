@@ -12,7 +12,7 @@ const createRecordIntoDatabase = async (body) => {
       CallerZip: body.CallerZip,
       RecordingDuration: body.RecordingDuration,
       RecordingUrl: body.RecordingUrl,
-      Status: "waiting",
+      Status: "Waiting",
     });
   } catch (err) {
     throw JSON.stringify(err);
@@ -45,10 +45,10 @@ const takeCase = async (CallSid, id) => {
     if (caseData === null) throw "Sorry but this case doesn't exist anymore";
 
     // check if the case isn't already taked
-    if (caseData.dataValues.Status != "taken" && caseData.dataValues.takenBy !== null) throw "This case already has been taken";
+    if (caseData.dataValues.Status != "Taken" && caseData.dataValues.takenBy !== null) throw "This case already has been taken";
 
     // update database record
-    await Recordings.update({ takenBy: id, Status: "taken" }, { where: { CallSid: CallSid } });
+    await Recordings.update({ takenBy: id, Status: "Taken", takenByTime: Date.now() }, { where: { CallSid: CallSid } });
 
     // emit case data object and notify every client
     removeOpenCase.emit("event", caseData);
@@ -72,10 +72,9 @@ const releaseCase = async (CallSid, UserId) => {
     if (caseData.dataValues.takenBy != UserId) throw "Sorry, but this case doesn't belong to you...";
 
     // update database record
-    await Recordings.update({ takenBy: null, Status: "waiting" }, { where: { CallSid: CallSid } });
+    await Recordings.update({ takenBy: null, Status: "Waiting" }, { where: { CallSid: CallSid } });
 
     // return a beautiful answare :D
-    return true;
     return true;
   } catch (err) {
     throw JSON.stringify(err);
@@ -90,4 +89,9 @@ const getCaseByCallSid = async (id) => {
   }
 };
 
-export { createRecordIntoDatabase, getAllCases, getMyCases, takeCase, releaseCase, getCaseByCallSid };
+const closeCase = async (data) => {
+  try {
+    await Recordings.update({ solvedDescription: data.Description, solvedClientName: data.Contact_Name, solvedByID: data.SolvedBy, Status: "Solved" }, { where: { Caller: data.Caller_Number } });
+  } catch (err) {}
+};
+export { createRecordIntoDatabase, getAllCases, getMyCases, takeCase, releaseCase, getCaseByCallSid, closeCase };

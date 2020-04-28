@@ -8,6 +8,7 @@ import getCases from "./events/utilityEvents/getCases";
 import getMyCases from "./events/utilityEvents/getMyCases";
 import takeCase from "./events/utilityEvents/takeCase";
 import releaseCase from "./events/utilityEvents/releaseCase";
+import solveCase from "./events/utilityEvents/solveCase";
 
 const connection = (socket) => {
   socket.on("login", login.bind(null, socket));
@@ -18,6 +19,7 @@ const connection = (socket) => {
   socket.on("getMyCases", getMyCases.bind(null, socket));
   socket.on("takeCase", takeCase.bind(null, socket));
   socket.on("releaseCase", releaseCase.bind(null, socket));
+  socket.on("solveCase", solveCase.bind(null, socket));
 };
 
 export default connection;

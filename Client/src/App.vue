@@ -23,11 +23,8 @@ export default {
       if (data.includes("A new password has been sent on"))
         this.$router.push("/login");
 
-      // check if its a case success message
-      if (
-        data.includes("has been successfully taken") ||
-        data.includes("has been successfully release")
-      )
+      // update cases on each success message
+      if (this.$store.state.token)
         this.$socket.emit("getMyCases", this.$store.state.token);
 
       // show a success notification

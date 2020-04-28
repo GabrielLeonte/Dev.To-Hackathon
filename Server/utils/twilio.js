@@ -13,12 +13,23 @@ const sendNewPassword = async (phone, password) => {
       from: "+18554101733",
       to: `${process.env.COUNTRY_PREFIX}${phone}`,
     });
-
-    return true;
   } catch (err) {
-    console.log(err);
-    throw err;
+    throw JSON.stringify(err);
   }
 };
 
-export default sendNewPassword;
+const sendSolveSMS = async (type, data) => {
+  try {
+    const phone_numbers_array = JSON.parse(process.env[type]);
+
+    await client.messages.create({
+      body: `Client Contact Infos\n - Name: ${data.Contact_Name} \n - Phone: ${data.Caller_Number}\n\nAddress\n - City: ${data.City}\n - State: ${data.State}\n - Zip: ${data.Zip}\n\n\nClient Request Description \n${data.Description}`,
+      from: "+18554101733",
+      to: phone_numbers_array[Math.floor(Math.random() * phone_numbers_array.length)],
+    });
+  } catch (err) {
+    throw JSON.stringify(err);
+  }
+};
+
+export { sendNewPassword, sendSolveSMS };

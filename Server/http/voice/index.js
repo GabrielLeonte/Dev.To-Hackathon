@@ -7,15 +7,8 @@ const voice = async (req, res) => {
 
   twiml.record({
     action: "/record",
-    maxLength: "200",
+    maxLength: "180000",
   });
-
-  /* const gather = twiml.gather({
-    numDigits: 1,
-    action: "/gather",
-  });
-
-  gather.say("");*/
 
   // Render the response as XML in reply to the webhook request
   res.type("text/xml");

@@ -10,6 +10,7 @@ const store = new Vuex.Store({
     token: "" || localStorage.getItem("token"),
     cases: [],
     mycases: [],
+    historyCases: [],
     user: {}
   },
   mutations: {
@@ -27,10 +28,11 @@ const store = new Vuex.Store({
       router.push("/login");
     },
     cases(state, data) {
-      state.cases = data.filter(value => value.Status === "waiting");
+      state.cases = data.filter(value => value.Status === "Waiting");
     },
     mycases(state, data) {
-      state.mycases = data;
+      state.mycases = data.filter(value => value.Status === "Taken");
+      state.historyCases = data.filter(value => value.Status === "Solved");
     },
     newOpenCase(state, data) {
       state.cases.push(data);

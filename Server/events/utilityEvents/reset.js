@@ -1,4 +1,4 @@
-import sendNewPassword from "../../utils/twilio";
+import { sendNewPassword } from "../../utils/twilio";
 import { generatePassword } from "../../utils/strings";
 import { updatePassword, checkIfUserExists } from "../../utils/database";
 

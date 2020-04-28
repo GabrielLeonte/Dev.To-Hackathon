@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="title">
-      <span>
-        My Cases
-      </span>
+      <span>My Cases</span>
     </div>
     <div class="table-container">
       <table>
@@ -14,7 +12,7 @@
           <th style="width: 100px;">Caller State</th>
           <th style="width: 100px;">Caller Zip</th>
           <th style="width: 80px;">Duration</th>
-          <th style="width: 210px;">Expire At</th>
+          <th style="width: 210px;">Taking time</th>
           <th style="width: 80px;">Status</th>
           <th style="width: 80px;">Play</th>
           <th style="width: 170px;">Submit</th>
@@ -31,7 +29,7 @@
           <td>{{ item.CallerState }}</td>
           <td>{{ item.CallerZip }}</td>
           <td>{{ item.RecordingDuration }} s</td>
-          <td>{{ new Date(item.expiresAt).toGMTString() }}</td>
+          <td>{{ new Date(Number(item.takenByTime)).toGMTString() }}</td>
           <td>{{ item.Status }}</td>
           <td>
             <button
@@ -83,14 +81,14 @@
           <div class="block">
             <span class="custom-input-title">Choose volunteer category</span>
             <div>
-              <select class="client-name" v-model="volunteerType" required>
-                <option value="food-delivery" selected>Food Delivery</option>
+              <select class="client-name" v-model="volunteerType">
+                <option value="food-delivery">Food Delivery</option>
                 <option value="human-help">Physical Help</option>
                 <option value="shoppings">Shoppings</option>
                 <option value="pharmacy-shoppings">Pharmacy Shoppings</option>
-                <option value="basic-food">
-                  Basic Food Shoppings (eg: Bread, Tomatos, Milk...)
-                </option>
+                <option value="basic-food"
+                  >Basic Food Shoppings (eg: Bread, Tomatos, Milk...)</option
+                >
                 <option value="other">Other</option>
               </select>
             </div>
@@ -108,9 +106,9 @@
             </div>
           </div>
           <div class="block">
-            <span class="custom-input-title">
-              Description (this one will be sent to he volunteer)
-            </span>
+            <span class="custom-input-title"
+              >Description (this one will be sent to he volunteer)</span
+            >
             <div>
               <textarea
                 cols="93"
@@ -159,7 +157,7 @@ export default {
                 CallSid: CallSid,
                 token: this.$store.state.token
               });
-              this.$modal.hide("dialog")
+              this.$modal.hide("dialog");
             }
           },
           {
@@ -171,13 +169,14 @@ export default {
     submitToVolunteers() {
       this.$modal.hide("submit-to-volunteers");
       const data = {
+        token: this.$store.state.token,
         id: this.modalID,
         description: this.description,
         type: this.volunteerType,
         clientName: this.clientName
       };
 
-      this.$socket.emit("solve_cases", data);
+      this.$socket.emit("solveCase", data);
     }
   },
   mounted() {
@@ -185,7 +184,7 @@ export default {
   },
   data() {
     return {
-      volunteerType: "",
+      volunteerType: "food-delivery",
       clientName: "",
       description: "",
       modalID: ""

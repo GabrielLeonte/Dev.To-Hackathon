@@ -49,8 +49,14 @@ Recordings.init(
     takenByTime: {
       type: Sequelize.STRING,
     },
-    expiresAt: {
+    solvedDescription: {
       type: Sequelize.STRING,
+    },
+    solvedClientName: {
+      type: Sequelize.STRING,
+    },
+    solvedByID: {
+      type: Sequelize.INTEGER,
     },
   },
   {

@@ -11,29 +11,35 @@
           <th style="width: 40px;">ID</th>
           <th style="width: 300px;">Call ID</th>
           <th style="width: 180px;">Caller Number</th>
+          <th style="width: 180px;">Caller Contact Name</th>
           <th style="width: 130px;">Caller City</th>
           <th style="width: 100px;">Caller State</th>
           <th style="width: 100px;">Caller Zip</th>
           <th style="width: 80px;">Duration</th>
-          <th style="width: 210px;">Expire At</th>
-          <th style="width: 80px;">Status</th>
+          <th style="width: auto;">Description</th>
+          <th style="width: 80px; padding-left: 30px; padding-right: 30px;">
+            Status
+          </th>
+          <th>Closed at</th>
         </tr>
         <tr
-          v-for="(item, index) in $store.state.mycases"
+          v-for="(item, index) in $store.state.historyCases"
           :key="index"
           style="line-height: 40px; vertical-align: baseline;"
         >
-          <td>{{ index+1 }}</td>
+          <td>{{ index + 1 }}</td>
           <td>{{ item.CallSid }}</td>
           <td>{{ item.Caller }}</td>
+          <td>Mr/Miss {{ item.solvedClientName }}</td>
           <td>{{ item.CallerCity }}</td>
           <td>{{ item.CallerState }}</td>
           <td>{{ item.CallerZip }}</td>
           <td>{{ item.RecordingDuration }} s</td>
-          <td>{{ new Date(item.expiresAt).toGMTString() }}</td>
-          <td>Closed</td>
+          <td>{{ item.solvedDescription }}</td>
+          <td style="padding-left: 30px;">Closed</td>
+          <td>{{ new Date(item.updatedAt).toGMTString() }}</td>
         </tr>
-        <tr v-if="$store.state.mycases.length === 0">
+        <tr v-if="$store.state.historyCases.length === 0">
           <td style="font-size: 14.5px; padding-top: 10px">
             No case has been taken!
           </td>
