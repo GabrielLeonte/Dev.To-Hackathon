@@ -11,7 +11,7 @@ const sendNewPassword = async (phone, password) => {
     await client.messages.create({
       body: `Hello, here is your login data on out platform\n\nPhone: ${phone}\nNew Password: ${password} \n\nHave a nice day! \n - Support Team`,
       from: process.env.OPEN_PHONE_NUMBER,
-      to: `${process.env.COUNTRY_PREFIX}${phone}`,
+      to: phone
     });
   } catch (err) {
     throw JSON.stringify(err);
