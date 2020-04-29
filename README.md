@@ -60,7 +60,7 @@ cd Dev.To Hackathon
 2. Install dependencies
 
 ```bash
-npm install
+cd Server && npm install && cd ../Client && npm install && cd ../
 ```
 
 3. Create `./Server/.env` file with your own data
