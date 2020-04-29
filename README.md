@@ -100,7 +100,23 @@ OTHER=["+18554101733"]
 
 See [Twilio Account Settings](#twilio-account-settings) to locate the necessary environment variables.
 
-4. Run the application
+4. Update `Dev.To Hackathon/Client/src/main.js`
+If you changed the port or ip, go update line 19
+```javascript
+Vue.use(
+  new VueSocketIO({
+    debug: false,
+    connection: SocketIO("<your_ip:port>"),
+    vuex: {
+      store,
+      actionPrefix: "SOCKET_",
+      mutationPrefix: "SOCKET_"
+    }
+  })
+);
+```
+
+5. Run the application
 
 ```bash
 ./start.bat
@@ -112,7 +128,7 @@ Alternatively, you can use this command to start the server on a linux machine. 
 ./start.sh
 ```
 
-5. Navigate to [http://localhost:3000](http://localhost:8080)
+6. Navigate to [http://localhost:3000](http://localhost:8080)
 
 That's it!
 
