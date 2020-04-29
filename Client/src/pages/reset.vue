@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     reset() {
-      this.$socket.emit("reset", { phone: this.phone });
+      this.$socket.emit("reset", { phone: this.phone.trim() });
       try {
       } catch (err) {
         if (err) alert(err);

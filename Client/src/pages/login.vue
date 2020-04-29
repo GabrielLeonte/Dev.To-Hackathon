@@ -64,8 +64,8 @@ export default {
     login() {
       try {
         this.$socket.emit("login", {
-          phone: this.phone,
-          password: this.password
+          phone: this.phone.trim(),
+          password: this.password.trim()
         });
       } catch (err) {
         if (err) alert(err);

@@ -78,10 +78,10 @@ export default {
     signup() {
       try {
         this.$socket.emit("signup", {
-          lastname: this.lastname,
-          phone: this.phone,
-          password: this.password,
-          code: this.inviteCode
+          lastname: this.lastname.trim(),
+          phone: this.phone.trim(),
+          password: this.password.trim(),
+          code: this.inviteCode.trim()
         });
       } catch (err) {
         if (err) alert(err);
