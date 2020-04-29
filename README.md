@@ -44,7 +44,7 @@ all the config values we need to run the application:
 | :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Account&nbsp;Sid  | Your primary Twilio account identifier - find this [in the Console](https://www.twilio.com/console).                                                         |
 | Auth&nbsp;Token   | Used to authenticate - [just like the above, you'll find this here](https://www.twilio.com/console).                                                         |
-| Phone&nbsp;number | A Twilio phone number in [E.164 format](https://en.wikipedia.org/wiki/E.164) - you can [get one here](https://www.twilio.com/console/phone-numbers/incoming)  |
+| Phone&nbsp;number | A Twilio phone number in [E.164 format](https://en.wikipedia.org/wiki/E.164) - you can [get one here](https://www.twilio.com/console/phone-numbers/incoming) |
 
 ### Local development
 
@@ -70,7 +70,7 @@ cd Server && npm install && cd ../Client && npm install && cd ../
 PORT=3000
 
 // Sqlite3 database path (if you're using a folder like i do, make sure that it exists)
-DB_PATH="./database/database.sqlite" 
+DB_PATH="./database/database.sqlite"
 
 // JSON Web Token Secret
 ACCOUNT_SECRET="Aloha-This-Is-A-Twilio-Project-Muahahahahah--It-Will-Be-The-Best"
@@ -101,7 +101,8 @@ OTHER=["+18554101733"]
 See [Twilio Account Settings](#twilio-account-settings) to locate the necessary environment variables.
 
 4. Update `Dev.To Hackathon/Client/src/main.js`
-If you changed the port or ip, go update line 19
+   If you changed the port or ip, go update line 19
+
 ```javascript
 Vue.use(
   new VueSocketIO({
@@ -110,8 +111,8 @@ Vue.use(
     vuex: {
       store,
       actionPrefix: "SOCKET_",
-      mutationPrefix: "SOCKET_"
-    }
+      mutationPrefix: "SOCKET_",
+    },
   })
 );
 ```
