@@ -7,7 +7,6 @@ import SignupPage from "../pages/signup";
 import ResetPage from "../pages/reset";
 import openCasesPage from "../pages/openCases";
 import historyPage from "../pages/history";
-import testPage from "../pages/testpage";
 
 Vue.use(Router);
 
@@ -47,15 +46,6 @@ export default new Router({
       component: ResetPage,
       beforeEnter: (to, from, next) => {
         if (store.state.token) next("/");
-        else next();
-      }
-    },
-    {
-      path: "/test",
-      name: "testPage",
-      component: testPage,
-      beforeEnter: (to, from, next) => {
-        if (!store.state.token) next("/login");
         else next();
       }
     },

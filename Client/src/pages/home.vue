@@ -1,139 +1,109 @@
 <template>
-  <div>
-    <div class="title">
-      <span>My Cases</span>
-    </div>
-    <div class="table-container">
-      <table>
-        <tr>
-          <th style="width: 300px;">Call ID</th>
-          <th style="width: 180px;">Caller Number</th>
-          <th style="width: 130px;">Caller City</th>
-          <th style="width: 100px;">Caller State</th>
-          <th style="width: 100px;">Caller Zip</th>
-          <th style="width: 80px;">Duration</th>
-          <th style="width: 210px;">Taking time</th>
-          <th style="width: 80px;">Status</th>
-          <th style="width: 80px;">Play</th>
-          <th style="width: 170px;">Submit</th>
-          <th style="width: 150px;">Release the case</th>
-        </tr>
-        <tr
-          v-for="(item, index) in $store.state.mycases"
-          :key="index"
-          style="line-height: 40px; vertical-align: baseline;"
-        >
-          <td>{{ item.CallSid }}</td>
-          <td>{{ item.Caller }}</td>
-          <td>{{ item.CallerCity }}</td>
-          <td>{{ item.CallerState }}</td>
-          <td>{{ item.CallerZip }}</td>
-          <td>{{ item.RecordingDuration }} s</td>
-          <td>{{ new Date(Number(item.takenByTime)).toGMTString() }}</td>
-          <td>{{ item.Status }}</td>
-          <td>
-            <button
-              class="button is-danger is-small"
-              @click="playAudio(item.RecordingUrl)"
-            >
-              Listen
-            </button>
-          </td>
-          <td>
-            <button
-              class="button is-success is-small"
-              @click="openVolunteerModal(item.CallSid)"
-            >
-              Submit to Volunteers
-            </button>
-          </td>
-          <td>
-            <button
-              @click="release(item.CallSid)"
-              class="button is-danger is-small"
-            >
-              Release
-            </button>
-          </td>
-        </tr>
-        <tr v-if="$store.state.mycases.length === 0">
-          <td style="font-size: 14.5px; padding-top: 10px">
-            No case has been taken!
-          </td>
-        </tr>
-      </table>
-    </div>
-    <!-- Send to Volunteer Modal -->
-    <modal name="submit-to-volunteers" :height="550">
-      <form @submit.prevent="submitToVolunteers">
-        <div>
-          <div>
-            <span class="custom-title">Submit to Volunteers</span>
-          </div>
-          <div>
-            <span class="custom-subtitle">
+    <div>
+        <div class="title">
+            <span>My Cases</span>
+        </div>
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th style="width: 300px;">Call ID</th>
+                    <th style="width: 180px;">Caller Number</th>
+                    <th style="width: 130px;">Caller City</th>
+                    <th style="width: 100px;">Caller State</th>
+                    <th style="width: 100px;">Caller Zip</th>
+                    <th style="width: 80px;">Duration</th>
+                    <th style="width: 210px;">Taking time</th>
+                    <th style="width: 80px;">Status</th>
+                    <th style="width: 80px;">Play</th>
+                    <th style="width: 170px;">Submit</th>
+                    <th style="width: 150px;">Release the case</th>
+                </tr>
+                <tr v-for="(item, index) in $store.state.mycases" :key="index" style="line-height: 40px; vertical-align: baseline;">
+                    <td>{{ item.CallSid }}</td>
+                    <td>{{ item.Caller }}</td>
+                    <td>{{ item.CallerCity }}</td>
+                    <td>{{ item.CallerState }}</td>
+                    <td>{{ item.CallerZip }}</td>
+                    <td>{{ item.RecordingDuration }} s</td>
+                    <td>{{ new Date(Number(item.takenByTime)).toGMTString() }}</td>
+                    <td>{{ item.Status }}</td>
+                    <td>
+                        <button class="button is-danger is-small" @click="playAudio(item.RecordingUrl)">
+                            Listen
+                        </button>
+                    </td>
+                    <td>
+                        <button class="button is-success is-small" @click="openVolunteerModal(item.CallSid)">
+                            Submit to Volunteers
+                        </button>
+                    </td>
+                    <td>
+                        <button @click="release(item.CallSid)" class="button is-danger is-small">
+                            Release
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <tr v-if="$store.state.mycases.length === 0">
+                <td style="font-size: 14.5px; padding-top: 10px">
+                    No case has been taken!
+                </td>
+            </tr>
+        </div>
+        <!-- Send to Volunteer Modal -->
+        <modal name="submit-to-volunteers" :height="550">
+            <form @submit.prevent="submitToVolunteers">
+                <div>
+                    <div>
+                        <span class="custom-title">Submit to Volunteers</span>
+                    </div>
+                    <div>
+                        <span class="custom-subtitle">
               - In order to help peoples you will have to chose the best
               volunteer for the user's requests!
             </span>
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="block">
-            <span class="custom-input-title">Choose volunteer category</span>
-            <div>
-              <select class="client-name" v-model="volunteerType">
-                <option value="food-delivery">Food Delivery</option>
-                <option value="human-help">Physical Help</option>
-                <option value="shoppings">Shoppings</option>
-                <option value="pharmacy-shoppings">Pharmacy Shoppings</option>
-                <option value="basic-food"
-                  >Basic Food Shoppings (eg: Bread, Tomatos, Milk...)</option
-                >
-                <option value="other">Other</option>
-              </select>
-            </div>
-          </div>
-          <div class="block">
-            <span class="custom-input-title">Client Contact Name</span>
-            <div>
-              <input
-                type="text"
-                class="client-name"
-                placeholder="Name"
-                v-model="clientName"
-                required
-              />
-            </div>
-          </div>
-          <div class="block">
-            <span class="custom-input-title"
-              >Description (this one will be sent to he volunteer)</span
-            >
-            <div>
-              <textarea
-                cols="93"
-                rows="7"
-                style="resize:none;"
-                v-model="description"
-                required
-              ></textarea>
-            </div>
-          </div>
-          <div class="block submit">
-            <div>
-              <input
-                type="submit"
-                class="button is-success is-small"
-                value="Submit"
-              />
-            </div>
-          </div>
-        </div>
-      </form>
-    </modal>
-    <!-- Release Modal -->
-    <v-dialog />
-  </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="block">
+                        <span class="custom-input-title">Choose volunteer category</span>
+                        <div>
+                            <select class="client-name" v-model="volunteerType">
+                                <option value="food-delivery">Food Delivery</option>
+                                <option value="human-help">Physical Help</option>
+                                <option value="shoppings">Shoppings</option>
+                                <option value="pharmacy-shoppings">Pharmacy Shoppings</option>
+                                <option value="basic-food">Basic Food Shoppings (eg: Bread, Tomatos, Milk...)</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <span class="custom-input-title">Client Contact Name</span>
+                        <div>
+                            <input type="text" class="client-name" placeholder="Name" v-model="clientName" required />
+                        </div>
+                    </div>
+                    <div class="block">
+                        <span class="custom-input-title">
+                          Description (this one will be sent to he volunteer)
+
+                        </span>
+                        <div>
+                            <textarea cols="93" rows="7" style="resize:none;" v-model="description" required></textarea>
+                        </div>
+                    </div>
+                    <div class="block submit">
+                        <div>
+                            <input type="submit" class="button is-success is-small" value="Submit" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </modal>
+        <!-- Release Modal -->
+        <v-dialog />
+    </div>
 </template>
 
 <script>

@@ -25,10 +25,6 @@
           <div class="left"><span class="material-icons">history</span></div>
           <div class="center"><span>History</span></div>
         </router-link>
-        <router-link to="/settings" class="drawer-btn">
-          <div class="left"><span class="material-icons">settings</span></div>
-          <div class="center"><span>Settings</span></div>
-        </router-link>
       </div>
     </div>
   </section>

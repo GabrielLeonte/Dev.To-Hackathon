@@ -81,6 +81,7 @@ export default {
 }
 .login-page {
   height: 100vh;
+  text-align: center;
 }
 .title > h1 {
   margin-top: 8%;
@@ -134,7 +135,6 @@ img {
   width: 230px;
   margin-bottom: 3%;
 }
-
 .vue-notification {
   padding: 10px;
   margin: 0 5px 5px;
@@ -147,17 +147,14 @@ img {
   margin-right: 30px;
   padding-top: 20px;
 }
-
 .vue-notification.warn {
   background: #ffb648;
   border-left-color: #f48a06;
 }
-
 .vue-notification.error {
   background: #e54d42;
   border-left-color: #b82e24;
 }
-
 .vue-notification.success {
   background: #68cd86;
   border-left-color: #42a85f;

@@ -97,6 +97,7 @@ export default {
 }
 .login-page {
   height: 100vh;
+  text-align: center;
 }
 .title > h1 {
   margin-top: 8%;
