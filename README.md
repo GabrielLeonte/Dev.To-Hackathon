@@ -134,6 +134,6 @@ This template is open source and welcomes contributions. All contributions are s
 
 ## Disclaimer
 
-No warranty expressed or implied. Software is as is.
+No warranty expressed or implied. Software is as is. Also no warranty on my English(terrible i know)
 
 [twilio]: https://www.twilio.com
