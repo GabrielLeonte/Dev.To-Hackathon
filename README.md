@@ -1,20 +1,17 @@
 # We Help App
 
-
 ## About
 
 We help is a platform that connects local citizens and volunteers, with the goal of helping them getting necessary products from local markets with the help of volunteers
-
 
 ### How it works
 
 This application has the backend built in NodeJS using Sequelize as ORM Manager, ExpressJS as handle server for Twilio API, and Socket.IO as client handle server.
 The frontend is entirely built in VueJS, CSS and Bulma.
 
-
 ### How it works for the local citizens
 
-A local citizen can call the free phone number provided by local authority, and say his requirements, with some contact data like his name, street, etc. 2-3 volunteers would have to forward his requirements to the volunteers from the field, with, who have a local budget and maybe a car. The field volunteer will receive the contact data (contact name, phone number) + a little description, and his mission would be to contact the local citizen and provide his requirements right to his door.
+A local citizen can call the free phone number provided by local authority, and say his requirements, with some contact data like his name, street, etc. 2-3 volunteers would have to forward his requirements to the volunteers from the field, with, who have a local budget and maybe a car. The field volunteer will receive through SMS Volunteer Delivery System, the contact data (contact name, phone number) + a little description, and his mission would be to contact the local citizen and provide his requirements right to his door.
 
 ## Features
 
@@ -27,13 +24,8 @@ A local citizen can call the free phone number provided by local authority, and 
 - Custom Inbound Call Message and Custom Call Recording Length
 - Simple Anti Errors System
 - 95% OOP Backend Arhitecture
-
-## How to use it
-
-1. Create a copy using [GitHub's repository template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) functionality
-2. Update the [`README.md`](README.md), [`package.json`](package.json) and [`app.json`](app.json) with the respective values.
-3. Build your app as necessary while making sure the tests pass.
-4. Publish your app to GitHub
+- SMS Volunteer Delivery System
+- SQLite3 as database for a quick deploy action
 
 ## Set up
 
@@ -61,8 +53,8 @@ After the above requirements have been met:
 1. Clone this repository and `cd` into it
 
 ```bash
-git clone git@github.com:twilio-labs/sample-template-nodejs.git
-cd sample-template-nodejs
+git clone https://github.com/GabrielLeonte/Dev.To-Hackathon Dev.To Hackathon
+cd Dev.To Hackathon
 ```
 
 2. Install dependencies
@@ -71,10 +63,39 @@ cd sample-template-nodejs
 npm install
 ```
 
-3. Set your environment variables
+3. Create `./Server/.env` file with your own data
 
-```bash
-npm run setup
+```
+// Server Port
+PORT=3000
+
+// Sqlite3 database path (if you're using a folder like i do, make sure that it exists)
+DB_PATH="./database/database.sqlite" 
+
+// JSON Web Token Secret
+ACCOUNT_SECRET="Aloha-This-Is-A-Twilio-Project-Muahahahahah--It-Will-Be-The-Best"
+
+// Record Action Settings
+MAXCALLLENGTH=180000
+CALL_MESSAGE="Hello tell us your requirements and something about you"
+
+// the number provided by twilio (this is the number that will be available to call)
+OPEN_PHONE_NUMBER="+18554101733"
+
+// Twilio Auth (get them from twilio account)
+accountSid="AC0............................"
+authToken="ec5............................"
+
+// SMS Data e.g: +40 - RO, +1 USA (just make sure that this is working by manualy testing it)
+COUNTRY_PREFIX="+1"
+
+// Volunteers types Number Arrays (minim one valid phone number)
+SHOPPINGS=["+18554101733"]
+FOOD_DELIVERY=["+18554101733"]
+HUMAN_HELP=["+18554101733"]
+PHARMACY_SHOPPINGS=["+18554101733"]
+BASIC_FOOD=["+18554101733"]
+OTHER=["+18554101733"]
 ```
 
 See [Twilio Account Settings](#twilio-account-settings) to locate the necessary environment variables.
@@ -82,48 +103,30 @@ See [Twilio Account Settings](#twilio-account-settings) to locate the necessary 
 4. Run the application
 
 ```bash
-npm start
+./start.bat
 ```
 
-Alternatively, you can use this command to start the server in development mode. It will reload whenever you change any files.
+Alternatively, you can use this command to start the server on a linux machine. (not tested)
 
 ```bash
-npm run dev
+./start.sh
 ```
 
-5. Navigate to [http://localhost:3000](http://localhost:3000)
+5. Navigate to [http://localhost:3000](http://localhost:8080)
 
 That's it!
-
-### Tests
-
-You can run the tests locally by typing:
-
-```bash
-npm test
-```
-
-### Cloud deployment
-
-Additionally to trying out this application locally, you can deploy it to a variety of host services. Here is a small selection of them.
-
-Please be aware that some of these might charge you for the usage or might make the source code for this application visible to the public. When in doubt research the respective hosting service first.
-
-| Service                           |                                                                                                                                                                                                                           |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Heroku](https://www.heroku.com/) | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)                                                                                                                                       |
-| [Glitch](https://glitch.com)      | [![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/remix/clone-from-repo?REPO_URL=https://github.com/twilio-labs/sample-template-nodejs.git) |
-| [Zeit](https://zeit.co/)          | [![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/twilio-labs/sample-template-nodejs/tree/master)                                                                 |
 
 ## Resources
 
 - [GitHub's repository template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) functionality
+- [Ilustrations from Undraw.co](https://undraw.co/illustrations)
+- [Bulma Framework](https://bulma.io/)
 
 ## Contributing
 
 This template is open source and welcomes contributions. All contributions are subject to our [Code of Conduct](https://github.com/twilio-labs/.github/blob/master/CODE_OF_CONDUCT.md).
 
-[Visit the project on GitHub](https://github.com/twilio-labs/sample-template-nodejs)
+[Visit the project on GitHub](https://github.com/GabrielLeonte/Dev.To-Hackathon)
 
 ## License
 

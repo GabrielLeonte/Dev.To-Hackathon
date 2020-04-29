@@ -1,2 +1,2 @@
 #!/bin/sh
-(cd Server && npm run dev) & (cd Client && npm run dev)
+(cd Server && npm run start) & (cd Client && npm run dev)
