@@ -44,7 +44,7 @@ all the config values we need to run the application:
 | :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Account&nbsp;Sid  | Your primary Twilio account identifier - find this [in the Console](https://www.twilio.com/console).                                                         |
 | Auth&nbsp;Token   | Used to authenticate - [just like the above, you'll find this here](https://www.twilio.com/console).                                                         |
-| Phone&nbsp;number | A Twilio phone number in [E.164 format](https://en.wikipedia.org/wiki/E.164) - you can [get one here](https://www.twilio.com/console/phone-numbers/incoming) |
+| Phone&nbsp;number | A Twilio phone number in [E.164 format](https://en.wikipedia.org/wiki/E.164) - you can [get one here](https://www.twilio.com/console/phone-numbers/incoming)  |
 
 ### Local development
 
@@ -116,7 +116,11 @@ Vue.use(
 );
 ```
 
-5. Run the application
+5. Update Twilio Phone Number webhook
+
+Example:![](https://i.imgur.com/2vcEYY2.png)
+
+6. Run the application
 
 ```bash
 ./start.bat
@@ -128,7 +132,7 @@ Alternatively, you can use this command to start the server on a linux machine. 
 ./start.sh
 ```
 
-6. Navigate to [http://localhost:3000](http://localhost:8080)
+7. Navigate to [http://localhost:3000](http://localhost:8080)
 
 That's it!
 

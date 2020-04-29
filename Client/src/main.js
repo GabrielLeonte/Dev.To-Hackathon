@@ -16,7 +16,7 @@ Vue.config.silent = true;
 Vue.use(
   new VueSocketIO({
     debug: false,
-    connection: SocketIO("http://localhost:3000"),
+    connection: SocketIO("http://139.59.142.36:3000/"),
     vuex: {
       store,
       actionPrefix: "SOCKET_",
