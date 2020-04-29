@@ -52,7 +52,7 @@
 export default {
     methods: {
         playAudio(url) {
-            if (!isPlaying) new Audio(url).play();
+           new Audio(url).play();
         },
         takeCase(CallSid) {
             this.$modal.show("dialog", {
@@ -78,11 +78,6 @@ export default {
     },
     mounted() {
         this.$socket.emit("getCases", this.$store.state.token);
-    },
-    data() {
-        return {
-            isPlaying: false
-        }
     }
 };
 </script>

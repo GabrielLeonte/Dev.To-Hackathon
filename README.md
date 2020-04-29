@@ -1,13 +1,16 @@
 # We Help App
 
+
 ## About
 
 We help is a platform that connects local citizens and volunteers, with the goal of helping them getting necessary products from local markets with the help of volunteers
+
 
 ### How it works
 
 This application has the backend built in NodeJS using Sequelize as ORM Manager, ExpressJS as handle server for Twilio API, and Socket.IO as client handle server.
 The frontend is entirely built in VueJS, CSS and Bulma.
+
 
 ### How it works for the local citizens
 
@@ -15,16 +18,15 @@ A local citizen can call the free phone number provided by local authority, and 
 
 ## Features
 
-- Node.js web server using [Express.js](https://npm.im/express)
-- Basic web user interface using [Handlebars](https://npm.im/express-handlebars) for templating and Bootstrap for UI
-- User interface to create reminders.
-- Unit tests using [`mocha`](https://npm.im/mocha) and [`chai`](https://npm.im/chai)
-- End to End UI testing using [Cypress](https://www.cypress.io/)
-- [Automated CI testing using GitHub Actions](/.github/workflows/nodejs.yml)
-- Linting and formatting using [ESLint](https://npm.im/eslint) and [Prettier](https://npm.im/prettier)
-- Interactive configuration of environment variables upon running `npm run setup` using [`configure-env`](https://npm.im/configure-env)
-- Project specific environment variables using `.env` files and [`dotenv-safe`](https://npm.im/dotenv-safe) by comparing `.env.example` and `.env`.
-- One click deploy buttons for Heroku, Glitch and now.sh
+- Unique Code Register System
+- Simple Reseting Password System
+- Friendly and Clean User Interface
+- Specific environment variables using `.env` file
+- Socket.IO Anti Abuse System
+- Real Time Data Update
+- Custom Inbound Call Message and Custom Call Recording Length
+- Simple Anti Errors System
+- 95% OOP Backend Arhitecture
 
 ## How to use it
 
