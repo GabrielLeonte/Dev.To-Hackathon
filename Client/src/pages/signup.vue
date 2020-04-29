@@ -19,7 +19,7 @@
         </div>
 
         <div class="column is-full">
-          <input type="tel" placeholder="Phone" v-model="phone" required />
+          <input type="tel" placeholder="Phone (eg: +15014380798)" v-model="phone" required />
         </div>
         <div class="column is-full">
           <input
